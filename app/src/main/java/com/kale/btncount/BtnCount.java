@@ -1,5 +1,6 @@
 package com.kale.btncount;
 
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -8,7 +9,6 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,14 +28,23 @@ public class BtnCount extends RelativeLayout {
 
     public BtnCount(Context context) {
         super(context);
+        this.context = context;
+        initView();
     }
 
     public BtnCount(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
+        this.attrs = attrs;
+        initView();
     }
 
     public BtnCount(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
+        this.attrs = attrs;
+        this.styleAttr = defStyleAttr;
+        initView();
     }
 
     public BtnCount(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -112,6 +121,10 @@ public class BtnCount extends RelativeLayout {
         }
     }
 
+    public String getNumber() {
+        return String.valueOf(currentNumber);
+    }
+
     public void setNumber(String number) {
         lastNumber = currentNumber;
         this.currentNumber = Integer.parseInt(number);
@@ -131,6 +144,14 @@ public class BtnCount extends RelativeLayout {
         }
     }
 
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.mListener = onClickListener;
+    }
+
+    public void setOnValueChangeListener(OnValueChangeListener onValueChangeListener) {
+        mOnValueChangeListener = onValueChangeListener;
+    }
+
     @FunctionalInterface
     public interface OnClickListener {
         void onClick(View view);
@@ -140,4 +161,24 @@ public class BtnCount extends RelativeLayout {
         void onValueChange(BtnCount view, int oldValue, int newValue);
     }
 
+    public void setRange(Integer startingNumber, Integer endingNumber) {
+        this.initialNumber = startingNumber;
+        this.finalNumber = endingNumber;
+    }
+
+    public void updateColors(int backgroundColor, int textColor) {
+        this.textView.setBackgroundColor(backgroundColor);
+        this.addBtn.setBackgroundColor(backgroundColor);
+        this.subtractBtn.setBackgroundColor(backgroundColor);
+
+        this.textView.setTextColor(textColor);
+        this.addBtn.setTextColor(textColor);
+        this.subtractBtn.setTextColor(textColor);
+    }
+
+    public void updateTextSize(int unit, float newSize) {
+        this.textView.setTextSize(unit, newSize);
+        this.addBtn.setTextSize(unit, newSize);
+        this.subtractBtn.setTextSize(unit, newSize);
+    }
 }
