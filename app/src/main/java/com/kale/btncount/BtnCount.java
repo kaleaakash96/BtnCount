@@ -1,6 +1,5 @@
 package com.kale.btncount;
 
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -71,7 +70,7 @@ public class BtnCount extends RelativeLayout {
         subtractBtn = findViewById(R.id.subtract_btn);
         addBtn = findViewById(R.id.add_btn);
         textView = findViewById(R.id.number_counter);
-        LinearLayout mLayout = findViewById(R.id.layout);
+        LinearLayout mLayout = findViewById(R.id.main_layout);
 
         subtractBtn.setTextColor(textColor);
         addBtn.setTextColor(textColor);
